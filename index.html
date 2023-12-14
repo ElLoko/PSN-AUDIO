@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospedagem de Áudios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Lista de Áudios</h1>
+  <ul id="audioList"></ul>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const audioList = document.getElementById('audioList');
+
+      fetch('audios/')
+        .then(response => response.json())
+        .then(files => {
+          files.forEach(file => {
+            const listItem = document.createElement('li');
+            listItem.textContent = file.replace('.mp3', '');
+            audioList.appendChild(listItem);
+          });
+        })
+        .catch(error => console.error('Erro ao obter a lista de áudios:', error));
+    });
+  </script>
+</body>
+
+</html>
